@@ -27,9 +27,9 @@ const signout = () => {
 };
 
 const menu = [
-  { name: "หน้าหลัก", icon: <HomeIcon />, path: "/home" },
+  { name: "หน้าหลัก", icon: <HomeIcon />, path: "/Home" },
   { name: "ระบบยืมเครื่องมือแพทย์", icon: <HomeRepairServiceIcon />, path: "/Borrow" },
-  { name: "ระบบจัดการข้อมูลแพทย์", icon: <ManageAccountsIcon />, path: "/" },
+  { name: "ระบบจัดการข้อมูลแพทย์", icon: <ManageAccountsIcon />, path: "/DoctorShow" },
   { name: "ระบบบันทึกข้อมูลล่วงเวลา", icon: <PendingActionsIcon />, path: "/Overtiome" },
   { name: "ระบบผู้ป่วยในการดูแลของแพทย์", icon: <HealingIcon />, path: "/Patient" },
   { name: "ระบบตารางเวลาแพทย์", icon: <CalendarMonthIcon />, path: "/Schedule" },
