@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 import DoctorShow from "./components/DoctorShow";
 import DoctorCreate from "./components/DoctorCreate";
 import Login from "./components/Login";
-import Home from "./components/Home";
 
 export default function App() {
 
