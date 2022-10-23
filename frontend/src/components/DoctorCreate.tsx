@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -50,7 +50,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 function DoctorCreate() {
-  // เอาไว้เก็บค่าวันที่และเวลา
+  // เอาไว้เก็บค่าวันที่และเวลา 
   const [dateBirth, setDateBirth] = React.useState<Date | null>(new Date());
   const [dateStart, setDateStart] = React.useState<Date | null>(new Date());
   // ตารางหลัก
@@ -62,6 +62,8 @@ function DoctorCreate() {
   // เอ่ไว้ใช้เพื่อ เช็คค่า
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
+
+  const [gender, setGender] = React.useState<string>("");
 
   // แสดงใน console f12/console
   console.log(doctor);
@@ -95,15 +97,6 @@ function DoctorCreate() {
     });
   };
 
-  const [value, setValue] = React.useState('Female');
-
-  const handleChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const id = event.target.id as keyof typeof DoctorCreate;
-    setDoctor({ ...doctor, [id]: value });
-    setValue((event.target as HTMLInputElement).value);
-  };
-
-
   function submit() {
     let data = {
       PersonalID: typeof doctor.PersonalID === "string" ? parseInt(doctor.PersonalID) : 0,
@@ -113,7 +106,7 @@ function DoctorCreate() {
       Password: doctor.Password ?? "",
       Salary: typeof doctor.Salary === "string" ? parseInt(doctor.Salary) : 0,
       Tel: doctor.Tel ?? "",
-      Gender: doctor.Gender ?? "",
+      Gender: gender,
       DateOfBirth: dateBirth,
       YearOfStart: dateStart,
       Address: doctor.Address ?? "",
@@ -334,16 +327,22 @@ function DoctorCreate() {
                 <FormLabel>Gender</FormLabel>
                 <RadioGroup
                   row
-                  value={value}
-                  onChange={handleChangeRadio}
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  onChange={(event) => {
+                    setGender(event.target.value);
+                  }}
                 >
-                  {/* สลับ */}
-                  <FormControlLabel value="Male" control={
-                    <Radio inputProps={{ id: 'Gender' }} />}
-                    label="Female" />
-                  <FormControlLabel value="FemMale" control={
-                    <Radio inputProps={{ id: 'Gender' }} />}
-                    label="Male" />
+                  <FormControlLabel
+                    value="Female"
+                    control={<Radio />}
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    value="Male"
+                    control={<Radio />}
+                    label="Male"
+                  />
                 </RadioGroup>
               </FormControl>
             </Grid>
