@@ -8,20 +8,30 @@ import { Link as RouterLink } from "react-router-dom";
 
 
 function Home() {
-    return (
-        < div >
-            <p>HOME</p>
-            <Grid item xs={12}>
-              <Button
-                component={RouterLink}
-                to="/DoctorShow"
-                variant="contained"
-              >
-                Back
-              </Button>
-              </Grid>
-        </div >
-    );
+  return (
+    < div >
+      <p>HOME</p>
+      <Grid item xs={6}>
+        <Button
+          component={RouterLink}
+          to="/Login"
+          variant="contained"
+        >
+          Admin
+        </Button>
+      </Grid>
+
+      <Grid item xs={6}>
+        <Button
+          component={RouterLink}
+          to="/DoctorShow"
+          variant="contained"
+        >
+          Doctor
+        </Button>
+      </Grid>
+    </div >
+  );
 }
 
 export default Home;

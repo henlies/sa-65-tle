@@ -26,7 +26,7 @@ export default function App() {
     <Navbar />
 
     <Routes>
-      <Route path="/Home" element={<Home />} />
+      <Route path="/" element={<DoctorShow />} />
       <Route path="/DoctorShow" element={<DoctorShow />} />
       <Route path="/Doctorcreate" element={<DoctorCreate />} />
 

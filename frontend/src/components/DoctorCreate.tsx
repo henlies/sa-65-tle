@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -17,6 +17,9 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
+// สี
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { green } from "@mui/material/colors";
 
 // assige type
 import { DoctorsInterface } from "../models/IDoctor";
@@ -26,6 +29,18 @@ import { WorkPlacesInterface } from "../models/IWorkPlace";
 // service
 import { GetAdminByID } from "../service/HttpClientService";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: green[500],
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#e8f5e9",
+    },
+  }
+});
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -83,89 +98,90 @@ function DoctorCreate() {
   const [value, setValue] = React.useState('Female');
 
   const handleChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
     const id = event.target.id as keyof typeof DoctorCreate;
     setDoctor({ ...doctor, [id]: value });
+    setValue((event.target as HTMLInputElement).value);
   };
 
 
-    function submit() {
-      let data = {
-        PersonalID: typeof doctor.PersonalID === "string" ? parseInt(doctor.PersonalID) : 0,
-        Name: doctor.Name ?? "",
-        Position: doctor.Position ?? "",
-        Email: doctor.Email ?? "",
-        Password: doctor.Password ?? "",
-        Salary: typeof doctor.Salary === "string" ? parseInt(doctor.Salary) : 0,
-        Tel: doctor.Tel ?? "",
-        Gender: doctor.Gender ?? "",
-        DateOfBirth: dateBirth,
-        YearOfStart: dateStart,
-        Address: doctor.Address ?? "",
-        AdminID: doctor.AdminID ?? "",
-        WorkPlaceID: typeof doctor.WorkPlaceID === "string" ? parseInt(doctor.WorkPlaceID) : 0,
-        MedicalFieldID: typeof doctor.MedicalFieldID === "string" ? parseInt(doctor.MedicalFieldID) : 0,
-      };
-
-      // fetch POST
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      };
-      fetch(`${apiUrl}/doctors`, requestOptions)
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.data) {
-            setSuccess(true);
-          } else {
-            setError(true);
-          }
-        });
-    }
-
-    // fetch GET
-    // apiUrl + /หน้าเว็บต่างๆ เพื่อสั้นต่อการเขียน code
-    const apiUrl = "http://localhost:8080";
-    const fetchAdmins = async () => {
-      fetch(`${apiUrl}/admins`)
-        .then(response => response.json())
-        .then(res => {
-          setAdmin(res.data);
-        })
-    }
-    const fetchMedicalFields = async () => {
-      fetch(`${apiUrl}/medicalfields`)
-        .then(response => response.json())
-        .then(res => {
-          setMedicalField(res.data);
-        })
-    }
-    const fetchWorkPlaces = async () => {
-      fetch(`${apiUrl}/workplaces`)
-        .then(response => response.json())
-        .then(res => {
-          setWorkPlace(res.data);
-        })
-    }
-    const fetchAdminByID = async () => {
-      let res = await GetAdminByID();
-      doctor.AdminID = res.ID;
-      if (res) {
-        setAdmin(res);
-      }
+  function submit() {
+    let data = {
+      PersonalID: typeof doctor.PersonalID === "string" ? parseInt(doctor.PersonalID) : 0,
+      Name: doctor.Name ?? "",
+      Position: doctor.Position ?? "",
+      Email: doctor.Email ?? "",
+      Password: doctor.Password ?? "",
+      Salary: typeof doctor.Salary === "string" ? parseInt(doctor.Salary) : 0,
+      Tel: doctor.Tel ?? "",
+      Gender: doctor.Gender ?? "",
+      DateOfBirth: dateBirth,
+      YearOfStart: dateStart,
+      Address: doctor.Address ?? "",
+      AdminID: doctor.AdminID ?? "",
+      WorkPlaceID: typeof doctor.WorkPlaceID === "string" ? parseInt(doctor.WorkPlaceID) : 0,
+      MedicalFieldID: typeof doctor.MedicalFieldID === "string" ? parseInt(doctor.MedicalFieldID) : 0,
     };
 
-    // เพื่อเอา api มาใช้งาน
-    useEffect(() => {
-      fetchAdmins();
-      fetchMedicalFields();
-      fetchWorkPlaces();
-      fetchAdminByID();
-    }, []);
+    // fetch POST
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    fetch(`${apiUrl}/doctors`, requestOptions)
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          setSuccess(true);
+        } else {
+          setError(true);
+        }
+      });
+  }
 
-    // html หน้าเว็บ
-    return (
+  // fetch GET
+  // apiUrl + /หน้าเว็บต่างๆ เพื่อสั้นต่อการเขียน code
+  const apiUrl = "http://localhost:8080";
+  const fetchAdmins = async () => {
+    fetch(`${apiUrl}/admins`)
+      .then(response => response.json())
+      .then(res => {
+        setAdmin(res.data);
+      })
+  }
+  const fetchMedicalFields = async () => {
+    fetch(`${apiUrl}/medicalfields`)
+      .then(response => response.json())
+      .then(res => {
+        setMedicalField(res.data);
+      })
+  }
+  const fetchWorkPlaces = async () => {
+    fetch(`${apiUrl}/workplaces`)
+      .then(response => response.json())
+      .then(res => {
+        setWorkPlace(res.data);
+      })
+  }
+  const fetchAdminByID = async () => {
+    let res = await GetAdminByID();
+    doctor.AdminID = res.ID;
+    if (res) {
+      setAdmin(res);
+    }
+  };
+
+  // เพื่อเอา api มาใช้งาน
+  useEffect(() => {
+    fetchAdmins();
+    fetchMedicalFields();
+    fetchWorkPlaces();
+    fetchAdminByID();
+  }, []);
+
+  // html หน้าเว็บ
+  return (
+    <ThemeProvider theme={theme}>
       <Container maxWidth="md">
         <Snackbar
           open={success}
@@ -276,6 +292,7 @@ function DoctorCreate() {
                 <TextField
                   id="Password"
                   variant="outlined"
+                  // type="password"
                   type="string"
                   size="medium"
                   value={doctor.Password || ""}
@@ -321,12 +338,12 @@ function DoctorCreate() {
                   onChange={handleChangeRadio}
                 >
                   {/* สลับ */}
-                  <FormControlLabel value="Female" control={
-                    <Radio inputProps={{ id: 'Gender' }} />}
-                    label="Male" />
                   <FormControlLabel value="Male" control={
                     <Radio inputProps={{ id: 'Gender' }} />}
                     label="Female" />
+                  <FormControlLabel value="FemMale" control={
+                    <Radio inputProps={{ id: 'Gender' }} />}
+                    label="Male" />
                 </RadioGroup>
               </FormControl>
             </Grid>
@@ -416,24 +433,26 @@ function DoctorCreate() {
                 component={RouterLink}
                 to="/DoctorShow"
                 variant="contained"
+                color="success"
               >
-                Back
+                กลับ
               </Button>
 
               <Button
                 style={{ float: "right" }}
                 onClick={submit}
                 variant="contained"
-                color="primary"
+                color="success"
               >
-                SAVE DATA
+                บันทึกข้อมูล
               </Button>
             </Grid>
 
           </Grid>
         </Paper>
       </Container>
-    );
-  }
+    </ThemeProvider>
+  );
+}
 
-  export default DoctorCreate;
+export default DoctorCreate;

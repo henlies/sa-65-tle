@@ -1,6 +1,6 @@
 export interface AdminsInterface {
 
-    ID?: number,
+    ID: number,
     Ausername: string;
     Apassword: string;
     Aname: string;

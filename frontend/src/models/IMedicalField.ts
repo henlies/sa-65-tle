@@ -1,6 +1,6 @@
 export interface MedicalFieldsInterface {
 
-    ID?: number,
+    ID: number,
     Bname: string;
 
    }
