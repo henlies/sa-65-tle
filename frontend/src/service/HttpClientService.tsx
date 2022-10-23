@@ -27,6 +27,4 @@ async function GetAdminByID() {
   return res;
 }
 
-export {
-    GetAdminByID,
-};
+export { GetAdminByID };

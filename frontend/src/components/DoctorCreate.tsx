@@ -17,10 +17,10 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-// สี
+import Alert from "@mui/material/Alert";
+// color and theme for use
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green } from "@mui/material/colors";
-
 // assige type
 import { DoctorsInterface } from "../models/IDoctor";
 import { AdminsInterface } from "../models/IAdmin";
@@ -32,41 +32,38 @@ import { GetAdminByID } from "../service/HttpClientService";
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
+      // green color
       main: green[500],
     },
     secondary: {
-      // This is green.A700 as hex.
+      // this is green.A700 as hex
       main: "#e8f5e9",
     },
   }
 });
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
 function DoctorCreate() {
-  // เอาไว้เก็บค่าวันที่และเวลา 
+  // declare and assign all of date
   const [dateBirth, setDateBirth] = React.useState<Date | null>(new Date());
   const [dateStart, setDateStart] = React.useState<Date | null>(new Date());
-  // ตารางหลัก
+  // data base
   const [doctor, setDoctor] = React.useState<Partial<DoctorsInterface>>({});
-  // ประกาศแบบ Array เตรียม ComboBox
+  // declare and assign admin for combobox disable
   const [admin, setAdmin] = React.useState<Partial<AdminsInterface>>({ Aname: "" });
+  // declare and assign array for combobox
   const [medicalfield, setMedicalField] = React.useState<MedicalFieldsInterface[]>([]);
   const [workplace, setWorkPlace] = React.useState<WorkPlacesInterface[]>([]);
-  // เอ่ไว้ใช้เพื่อ เช็คค่า
+  // for event success or error(fail)
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
-
+  // declare and assign gender for radio buttons
   const [gender, setGender] = React.useState<string>("");
 
-  // แสดงใน console f12/console
+  // show on console f12/console
   console.log(doctor);
+  console.log(gender);
+  console.log(dateBirth);
+  console.log(dateStart);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -79,6 +76,7 @@ function DoctorCreate() {
     setError(false);
   };
 
+  // for type text field
   const handleInputChange = (
     event: React.ChangeEvent<{ id?: string; value: any }>
   ) => {
@@ -87,6 +85,7 @@ function DoctorCreate() {
     setDoctor({ ...doctor, [id]: value });
   };
 
+  // for combobox information
   const handleChange = (
     event: SelectChangeEvent<number>
   ) => {
@@ -178,7 +177,7 @@ function DoctorCreate() {
       <Container maxWidth="md">
         <Snackbar
           open={success}
-          autoHideDuration={6000}
+          autoHideDuration={4000}
           onClose={handleClose}
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         >
@@ -189,7 +188,7 @@ function DoctorCreate() {
 
         <Snackbar
           open={error}
-          autoHideDuration={6000}
+          autoHideDuration={4000}
           onClose={handleClose}
         >
           <Alert onClose={handleClose} severity="error">

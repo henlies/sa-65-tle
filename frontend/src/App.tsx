@@ -16,6 +16,7 @@ export default function App() {
     }
   }, []);
 
+  // if u not have token go to login page
   if (!token) {
     return <Login />;
   }

@@ -15,7 +15,6 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SigninInterface } from "../models/ISignin";
-// import { Login } from "../services/HttpClientService";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -91,7 +90,7 @@ function SignIn() {
             <Grid container component="main" sx={{ height: "100vh" }}>
                 <Snackbar
                     open={success}
-                    autoHideDuration={3000}
+                    autoHideDuration={4000}
                     onClose={handleClose}
                     anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 >
@@ -101,7 +100,7 @@ function SignIn() {
                 </Snackbar>
                 <Snackbar
                     open={error}
-                    autoHideDuration={3000}
+                    autoHideDuration={4000}
                     onClose={handleClose}
                     anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 >
