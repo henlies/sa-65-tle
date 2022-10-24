@@ -7,4 +7,4 @@ export interface AdminsInterface {
     Tel: string;
     Email: string;
 
-   }
+}

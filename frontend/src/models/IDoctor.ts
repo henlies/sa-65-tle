@@ -24,4 +24,4 @@ export interface DoctorsInterface {
     MedicalFieldID?: number;
     MedicalField: MedicalFieldsInterface;
 
-   }
+}

@@ -4,4 +4,4 @@ export interface WorkPlacesInterface {
     Pname: string;
     Paddress: string;
 
-   }
+}
