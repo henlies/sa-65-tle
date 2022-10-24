@@ -3,7 +3,6 @@ import { Link as RouterLink } from "react-router-dom";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -206,9 +205,8 @@ function DoctorCreate() {
                 <TextField
                   id="PersonalID"
                   variant="outlined"
-                  type="number"
                   size="medium"
-                  InputProps={{ inputProps: { max: 9999999999999, min: 1111111111111 } }}
+                  inputProps={{ maxLength: 13 }}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -254,7 +252,6 @@ function DoctorCreate() {
                   variant="outlined"
                   type="number"
                   size="medium"
-                  InputProps={{ inputProps: { max: 150000, min: 15000 } }}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -314,6 +311,7 @@ function DoctorCreate() {
                   id="Tel"
                   variant="outlined"
                   type="string"
+                  inputProps={{ maxLength: 10 }}
                   size="medium"
                   value={doctor.Tel || ""}
                   onChange={handleInputChange}
@@ -433,7 +431,7 @@ function DoctorCreate() {
                 variant="contained"
                 color="success"
               >
-                กลับ
+                ย้อนกลับ
               </Button>
 
               <Button

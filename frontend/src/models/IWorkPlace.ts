@@ -1,6 +1,6 @@
 export interface WorkPlacesInterface {
 
-    ID: number,
+    ID?: number,
     Pname: string;
     Paddress: string;
 

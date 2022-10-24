@@ -40,13 +40,13 @@ type WorkPlace struct {
 type Doctor struct {
 	gorm.Model
 	// รับข้อมูล PersonalID ที่ไม่ซ้ำกัน
-	PersonalID uint64 `gorm:"uniqueIndex"`
+	PersonalID uint `gorm:"uniqueIndex"`
 	Name       string
 	Position   string
 	// รับข้อมูล Email ที่ไม่ซ้ำกัน
 	Email       string `gorm:"uniqueIndex"`
 	Password    string
-	Salary      uint64
+	Salary      int
 	Tel         string
 	Gender      string
 	DateOfBirth time.Time

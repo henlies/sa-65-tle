@@ -51,9 +51,8 @@ function Doctors() {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Container maxWidth="md">
-
-          <Box
+      <Container maxWidth="md">
+      <Box
             display="flex"
             sx={{
               marginTop: 2,
@@ -136,7 +135,7 @@ function Doctors() {
               </Container>
             </div>
           </ThemeProvider>
-        </Container>
+      </Container>
       </ThemeProvider>
     </div>
   );

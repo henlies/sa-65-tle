@@ -4,7 +4,7 @@ import { MedicalFieldsInterface } from "./IMedicalField";
 
 export interface DoctorsInterface {
 
-    ID: number,
+    ID?: number,
     PersonalID: number;
     Name: string;
     Position: string;
@@ -17,11 +17,11 @@ export interface DoctorsInterface {
     YearOfStart: Date | null;
     Address: string;
 
-    AdminID: number;
+    AdminID?: number;
     Admin: AdminsInterface;
-    WorkPlaceID: number;
+    WorkPlaceID?: number;
     WorkPlace: WorkPlacesInterface;
-    MedicalFieldID: number;
+    MedicalFieldID?: number;
     MedicalField: MedicalFieldsInterface;
 
    }
