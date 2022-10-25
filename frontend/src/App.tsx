@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import DoctorShow from "./components/DoctorShow";
 import DoctorCreate from "./components/DoctorCreate";
 import Login from "./components/Login";
+import Main from "./components/Main";
 
 export default function App() {
 
@@ -23,15 +24,13 @@ export default function App() {
 
   return (
     <div>
-    <Navbar />
-
-    <Routes>
-      <Route path="/" element={<DoctorShow />} />
-      <Route path="/DoctorShow" element={<DoctorShow />} />
-      <Route path="/Doctorcreate" element={<DoctorCreate />} />
-
-    </Routes>
-    </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/DoctorShow" element={<DoctorShow />} />
+        <Route path="/Doctorcreate" element={<DoctorCreate />} />
+      </Routes>
+    </div >
 
   );
 
